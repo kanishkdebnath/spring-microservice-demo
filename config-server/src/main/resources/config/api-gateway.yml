@@ -1,0 +1,7 @@
+server:
+  port: 5000
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

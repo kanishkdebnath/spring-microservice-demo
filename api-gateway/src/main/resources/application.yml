@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: api-gateway  # Name of the gateway application
+
+  config:
+    import: "optional:configserver:http://localhost:4000"  # Import configuration from a config server
+
+  cloud:
+    gateway:
+      routes:
+        - id: employee-service  # Unique ID for the route
+          uri: lb://employee-service  # Load balancer URI pointing to the employee service
+          predicates:
+            - Path=/employees/**  # Route predicate that matches paths starting with /employees
+        - id: department-service  # Unique ID for the route
+          uri: lb://department-service  # Load balancer URI pointing to the department service
+          predicates:
+            - Path=/departments/**  # Route predicate that matches paths starting with /departments
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka/  # Eureka server URL
+    fetch-registry: true    # Enable fetching of the registry from the Eureka server (default: true)
+    register-with-eureka: true  # Enable registration of this service with Eureka (default: true)
+  instance:
+    prefer-ip-address: true  # Prefer using IP address instead of hostname for registration
+    lease-renewal-interval-in-seconds: 10  # How often the service renews its lease with Eureka
+    lease-expiration-duration-in-seconds: 30  # How long the Eureka server waits before marking this instance as unavailable

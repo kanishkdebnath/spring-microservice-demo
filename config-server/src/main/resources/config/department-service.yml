@@ -1,0 +1,18 @@
+server:
+  port: 3000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka/  # Eureka server URL
+    fetch-registry: true    # Enable fetching of the registry from the Eureka server (default: true)
+    register-with-eureka: true  # Enable registration of this service with Eureka (default: true)
+  instance:
+    prefer-ip-address: true  # Prefer using IP address instead of hostname for registration
+    lease-renewal-interval-in-seconds: 10  # How often the service renews its lease with Eureka
+    lease-expiration-duration-in-seconds: 30  # How long the Eureka server waits before marking this instance as unavailable
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

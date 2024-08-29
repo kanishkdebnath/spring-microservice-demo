@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: department-service  # Name of your service
+  config:
+    import: "optional:configserver:http://localhost:4000"
